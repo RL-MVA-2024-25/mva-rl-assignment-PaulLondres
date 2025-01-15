@@ -1,5 +1,4 @@
 from gymnasium.wrappers import TimeLimit
-from matplotlib import pyplot as plt
 
 from env_hiv import HIVPatient
 #from fast_env_py import FastHIVPatient
@@ -7,7 +6,6 @@ import numpy as np
 import xgboost as xgb
 import random
 import os
-from tqdm import tqdm
 import joblib
 from sklearn.preprocessing import StandardScaler
 
@@ -169,7 +167,7 @@ class ProjectAgent:
             current_epoch_rewards = []
             epoch_experiences = []
 
-            for trial in tqdm(range(trials_per_epoch), desc=f"Epoch n°{epoch + 1}/{total_epochs}"):
+            for trial in range(trials_per_epoch):
                 self.current_env = self.env_multi if np.random.rand() < self.multi_training_ratio else self.env_single
                 episode_experiences = self.gather_experience(200, self.current_env, random_policy=False)
                 total_episode_reward = sum(exp[2] for exp in episode_experiences)
