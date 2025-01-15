@@ -21,7 +21,7 @@ class ProjectAgent:
         self.boosting_params = {
             'objective': 'reg:squarederror',
             'eval_metric': ['rmse', 'mae'],
-            'max_depth': 7,
+            'max_depth': 9,
             'eta': 0.05,
             'subsample': 0.9,
             'colsample_bytree': 0.9,
@@ -245,7 +245,7 @@ class ProjectAgent:
             'normalizers': self.state_normalizers
         }, path)
 
-    def load(self, path=os.path.join(os.getcwd(), 'best_model.pt')):
+    def load(self, path=os.path.join(os.getcwd(), 'best_model2.pt')):
         loaded_data = joblib.load(path)
         self.q_models = loaded_data['models']
         self.state_normalizers = loaded_data['normalizers']
@@ -258,4 +258,4 @@ if __name__ == "__main__":
     agent = ProjectAgent()
 
     epoch_rewards, evaluation_scores_single, evaluation_scores_multi, moving_average_rewards = agent.train_agent(
-        total_epochs=200, trials_per_epoch=30)
+        total_epochs=300, trials_per_epoch=40)
